@@ -20,7 +20,10 @@
 
 from typing import List, Tuple, Optional
 
-def two_sum(n: int, arr: List[int], target_sum: int) -> Optional[Tuple[int, int]]:
+def two_sum(
+        n: int, arr: List[int], target_sum: int) -> Optional[Tuple[int, int]]:
+    """Нативный алгоритм (N^2)/2."""
+
     for i in range(0, n):
         for j in range(i + 1, n):
             if arr[i] + arr[j] == target_sum:
