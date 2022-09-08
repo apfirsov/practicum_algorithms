@@ -29,11 +29,35 @@ def two_sum_with_set(
     cache: set = set()
     for i in range(n):
         value = arr[i]
-        if value < target_sum:
-            second_value = target_sum - value
-            if second_value in cache:
-                return value, second_value
-            cache.add(value)
+        second_value = target_sum - value
+        if second_value in cache:
+            return second_value, value
+        cache.add(value)
+    return None
+
+
+def two_sum_with_two_pointers(
+        n:int, arr: List[int], target_sum: int) -> Optional[Tuple[int, int]]:
+    """С двумя указателями."""
+    if n < 2:
+        return None
+
+    arr.sort()
+    start: int = 0
+    end: int = n - 1
+
+    while start < end:
+        sum = arr[start] + arr[end]
+        if sum == target_sum:
+            return arr[start], arr[end]
+
+        if sum > target_sum:
+            end -= 1
+        else:
+            start += 1
+
+    return None
+
 
 def read_input() -> Tuple[int, List[int], int]:
     n = int(input())
@@ -41,11 +65,13 @@ def read_input() -> Tuple[int, List[int], int]:
     target_sum = int(input())
     return n, arr, target_sum
 
+
 def print_result(result: Optional[Tuple[int, int]]) -> None:
     if result is None:
         print(None)
     else:
         print(" ".join(map(str, result)))
+
 
 def test() -> None:
     data: List[Tuple[int, List[int], int]] = [
@@ -54,5 +80,7 @@ def test() -> None:
     ]
     for args in data:
         print_result(two_sum_with_set(*args))
-# print_result(two_sum_with_set(*read_input()))
-test()
+        print_result(two_sum_with_two_pointers(*args))
+
+print_result(two_sum_with_two_pointers(*read_input()))
+# test()
