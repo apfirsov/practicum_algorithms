@@ -20,7 +20,7 @@ from typing import List, Tuple
 
 def get_neighbours(matrix: List[List[int]],
                    row: int, col: int, n: int, m: int) -> List[int]:
-    """ID 70284441."""
+    """ID:70284441."""
     result: List[int] = []
     if 0 < row < n:
         result.append(matrix[row-1][col])

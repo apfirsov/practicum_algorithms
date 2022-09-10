@@ -13,7 +13,7 @@
 Выведите «WIN», если игрок выиграл, и «FAIL» в противном случае.
 """
 def check_parity(a: int, b: int, c: int) -> bool:
-    """ID 70283507."""
+    """ID:70283507."""
     remainder_a: int = a % 2
     return remainder_a == b % 2 and remainder_a == c % 2
 

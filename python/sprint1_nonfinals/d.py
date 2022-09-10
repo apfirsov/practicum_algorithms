@@ -1,13 +1,46 @@
-from typing import List
+"""
+Метеорологическая служба вашего города решила исследовать погоду новым
+способом.
 
-def get_weather_randomness(temperatures: List[int]) -> int:
-    # Здесь реализация вашего решения
-    pass
+Под температурой воздуха в конкретный день будем понимать максимальную
+температуру в этот день.
+Под хаотичностью погоды за n дней служба понимает количество дней,
+в которые температура строго больше, чем в день до (если такой существует)
+и в день после текущего (если такой существует).
+Например, если за 5 дней максимальная температура воздуха составляла
+[1, 2, 5, 4, 8] градусов, то хаотичность за этот период равна 2:
+в 3-й и 5-й дни выполнялись описанные условия.
+Определите по ежедневным показаниям температуры хаотичность погоды за
+этот период.
 
-def read_input() -> List[int]:
+Заметим, что если число показаний n=1, то единственный день будет хаотичным.
+
+Формат ввода
+В первой строке дано число n –— длина периода измерений в днях,
+1 ≤ n≤ 10^5.
+Во второй строке даны n целых чисел –— значения температуры в каждый из n дней
+Значения температуры не превосходят 273 по модулю.
+
+Формат вывода
+Выведите единственное число — хаотичность за данный период.
+"""
+from typing import List, Tuple
+
+
+def get_weather_randomness(temperatures: List[int], n: int) -> int:
+    """ID:70285704."""
+    result: int = 0
+    for i in range(n):
+        if ((i == 0 or temperatures[i] > temperatures[i-1])
+            and (i == n-1 or temperatures[i] > temperatures[i+1])):
+            result += 1
+    return result
+
+
+def read_input() -> Tuple[List[int], int]:
     n = int(input())
     temperatures = list(map(int, input().strip().split()))
-    return temperatures
+    return temperatures, n
 
-temperatures = read_input()
-print(get_weather_randomness(temperatures))
+
+print(get_weather_randomness(*read_input()))
