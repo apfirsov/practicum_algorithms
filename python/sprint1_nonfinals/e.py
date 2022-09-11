@@ -24,10 +24,10 @@
 """
 def get_longest_word(line: str) -> str:
     """ID: 70303442."""
-    result = ''
-    max_length = 0
+    result: str = ''
+    max_length: int = 0
     for word in line.split():
-        word_length = len(word)
+        word_length: int = len(word)
         if word_length > max_length:
             result = word
             max_length = word_length

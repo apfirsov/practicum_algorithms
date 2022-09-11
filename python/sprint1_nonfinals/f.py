@@ -16,7 +16,7 @@
 """
 def is_palindrome(line: str) -> bool:
     """ID: 70305361."""
-    alpha_line = ''.join([a for a in line.lower() if a.isalpha()])
+    alpha_line: str = ''.join([a for a in line.lower() if a.isalpha()])
     return alpha_line == alpha_line[::-1]
 
 print(is_palindrome(input().strip()))

@@ -14,7 +14,7 @@
 """
 def to_binary(number: int) -> str:
     """ID: 70306568."""
-    result = ''
+    result: str = ''
     while number > 0:
         result = str(number % 2) + result
         number = number // 2

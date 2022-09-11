@@ -19,13 +19,13 @@ from typing import Tuple
 
 def get_sum(first_number: str, second_number: str) -> str:
     "ID: 70308966."
-    first_i = len(first_number) - 1
-    second_i = len(second_number) - 1
+    first_i: int = len(first_number) - 1
+    second_i: int = len(second_number) - 1
 
-    result = ''
-    memory = False
+    result: str = ''
+    memory: bool = False
     while first_i >= 0 or second_i >= 0 or memory:
-        num = 0
+        num: int = 0
         if first_i >= 0 and first_number[first_i] == '1':
             num += 1
 
