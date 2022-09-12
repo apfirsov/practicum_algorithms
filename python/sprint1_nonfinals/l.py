@@ -11,6 +11,7 @@
 Формат вывода
 Выведите лишнюю букву.
 """
+
 from typing import Tuple, List
 
 
