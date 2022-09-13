@@ -22,12 +22,12 @@
 Выведите единственное число –— максимальное количество баллов,
 которое смогут набрать Гоша и Тимофей.
 """
-from typing import List, Tuple, Union
+from typing import Dict, List, Tuple, Union
 
 
 def get_max_point(k: int, matrix: List[List[Union[int, str]]]) -> int:
     """ID: 70418238."""
-    buttons: dict = {}
+    buttons: Dict[int, int] = {}
     players: int  = 2
     for i in range(4):
         for j in range(4):
