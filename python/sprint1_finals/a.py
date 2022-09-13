@@ -80,8 +80,7 @@ def get_nearest_zeros_naive(street: List[int]) -> List[int]:
 
 def read_input() -> List[int]:
     _ = input()
-    street = list(map(int, input().strip().split()))
-    return street
+    return list(map(int, input().strip().split()))
 
 
 print(" ".join(map(str, get_nearest_zeros(read_input()))))
