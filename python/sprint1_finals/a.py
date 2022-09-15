@@ -25,14 +25,14 @@
 Для каждого из участков выведите расстояние до ближайшего нуля.
 Числа выводите в одну строку, разделяя их пробелами.
 """
-from typing import List, Optional, Tuple
+from typing import List, Optional
 
 
 def get_nearest_zeros(street: List[int]) -> List[int]:
     """
     Оптимизированная версия наивного алгоритма.
     O(n): N + k*N, где k принадлежит [0, 1)
-    ID:70381570.
+    ID: 70476181.
     """
     a: Optional[int] = None
     for index, value in enumerate(street):
@@ -51,36 +51,11 @@ def get_nearest_zeros(street: List[int]) -> List[int]:
 
     return street
 
-def get_nearest_zeros_naive(street: List[int]) -> List[int]:
-    """
-    Первая версия наивного алгоритма.
-    O(n): 2N.
-    ID:70381472.
-    """
-    a: Optional[int] = None
-    for index, value in enumerate(street):
-        if value == 0:
-            a = 0
-        else:
-            street[index] = a
-        if a is not None:
-            a += 1
-
-    n: int = len(street)
-    b: int = street[n-1]
-    for i in range(n-1, -1, -1):
-        if street[i] == 0:
-            b = 0
-        elif street[i] is None or b < street[i]:
-            street[i] = b
-        b += 1
-
-    return street
-
 
 def read_input() -> List[int]:
     _ = input()
-    return list(map(int, input().strip().split()))
+    return [int(i) for i in input().strip().split()]
 
 
-print(" ".join(map(str, get_nearest_zeros(read_input()))))
+if __name__ == '__main__':
+    print(" ".join(map(str, get_nearest_zeros(read_input()))))
