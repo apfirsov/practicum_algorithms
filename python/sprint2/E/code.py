@@ -1,3 +1,15 @@
+"""
+Вася решил запутать маму —– делать дела в обратном порядке. Список его дел
+теперь хранится в двусвязном списке.
+Напишите функцию, которая вернёт список в обратном порядке.
+
+Формат ввода
+Функция принимает на вход единственный аргумент — голову двусвязного списка.
+Длина списка не превосходит 1000 элементов. Список не бывает пустым.
+
+Формат вывода
+Функция должна вернуть голову развернутого списка.
+"""
 # ! change LOCAL to False before submitting !
 # set LOCAL to True for local testing
 
@@ -10,10 +22,14 @@ if LOCAL:
             self.next = next  
             self.prev = prev
 
+
 def solution(node):
-    # Your code
-    # ヽ(´▽`)/
-    pass
+    while True:
+        node.prev, node.next = node.next, node.prev
+        if node.prev is None:
+            return node
+        node = node.prev
+
 
 def test():
     node3 = DoubleConnectedNode("node3")
@@ -38,6 +54,7 @@ def test():
     assert node1.next is node0 
     assert node1.prev is node2
     assert node0.prev is node1
+
 
 if __name__ == '__main__':
     test()
