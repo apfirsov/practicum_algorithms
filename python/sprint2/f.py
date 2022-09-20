@@ -24,6 +24,7 @@ from io import StringIO
 import sys
 from typing import Dict, List, Optional
 
+
 class StackMax:
 
     def __init__(self):
@@ -62,12 +63,12 @@ def read_input() -> List[List[str]]:
 
 def test():
     tests: Dict[str, List[List[str]]] = {
-            'None\n-2\n-2\n':
-                [['get_max'],['push', '7'],['pop'],['push', '-2'],
-                 ['push', '-1'],['pop'],['get_max'],['get_max'],],
-            'None\nerror\nerror\nerror\n10\n':
-                [['get_max'],['pop'],['pop'],['pop'],['push', '10'],
-                 ['get_max'],['push', '-9']]
+            'None\n-2\n-2\n': [['get_max'], ['push', '7'], ['pop'],
+                               ['push', '-2'], ['push', '-1'], ['pop'],
+                               ['get_max'], ['get_max']],
+            'None\nerror\nerror\nerror\n10\n': [['get_max'], ['pop'], ['pop'],
+                                                ['pop'], ['push', '10'],
+                                                ['get_max'], ['push', '-9']]
     }
 
     for exp, commands in tests.items():
