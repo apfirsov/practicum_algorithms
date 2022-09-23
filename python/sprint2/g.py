@@ -57,7 +57,6 @@ def main(commands: List[List[str]]) -> None:
         elif command[0] == 'pop':
             if stack.pop() is None:
                 print('error')
-
         elif command[0] == 'get_max':
             print(stack.get_max())
 
