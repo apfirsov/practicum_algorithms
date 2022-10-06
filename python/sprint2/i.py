@@ -24,7 +24,7 @@ size() — вернуть размер очереди;
 Напечатайте результаты выполнения нужных команд, по одному на строке.
 """
 from typing import List, Optional, Tuple
-from timeit import timeit
+
 
 class MyQueueSized:
 
@@ -83,5 +83,4 @@ def read_input() -> Tuple[int, List[List[str]]]:
     return max_size, commands
 
 if __name__ == '__main__':
-    max_size, commands = read_input()
-    print(timeit('main(max_size, commands)', number=1, globals=globals()))
+    main(*read_input())
