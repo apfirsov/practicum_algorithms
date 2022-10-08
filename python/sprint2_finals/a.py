@@ -1,4 +1,6 @@
 """
+Отправка ID: 71420508.
+
 Гоша реализовал структуру данных Дек, максимальный размер которого
 определяется заданным числом. Методы push_back(x), push_front(x), pop_back(),
 pop_front() работали корректно. Но, если в деке было много элементов,
@@ -79,6 +81,7 @@ class MyDeque:
 
 
 def main(max_size: int, commands: List[List[str]]) -> None:
+    """ID: 71420508."""
     my_deque = MyDeque(max_size)
     for command in commands:
         if command[0] == 'push_back':
