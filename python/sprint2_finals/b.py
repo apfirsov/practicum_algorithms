@@ -1,5 +1,5 @@
 """
-Отправка ID: 71354041.
+Отправка ID: 71574861.
 
 Задание связано с обратной польской нотацией. Она используется для парсинга
 арифметических выражений. Еще её иногда называют постфиксной нотацией.
@@ -69,39 +69,40 @@
 Формат вывода
 Выведите единственное число — значение выражения.
 """
-from typing import Dict, List, Optional
+from typing import Callable, Dict, List, Optional
 
 
-class PolandStack:
+class Stack:
 
     def __init__(self):
-        self.items: List = []
+        self.__items: List[int] = []
 
     def push(self, item: int) -> None:
-        self.items.append(item)
+        self.__items.append(item)
 
     def pop(self) -> Optional[int]:
-        if not len(self.items):
+        if not len(self.__items):
             return None
-        return self.items.pop()
+        return self.__items.pop()
 
-    def calc(self, action: str) -> None:
-        if len(self.items) < 2:
+    def calculate(self, action: str) -> None:
+        if len(self.__items) < 2:
             return None
 
-        b = self.pop()
-        a = self.pop()
-        if action == '+':
-            self.push(a+b)
-        elif action == '-':
-            self.push(a-b)
-        elif action == '*':
-            self.push(a*b)
-        elif action == '/':
-            self.push(a//b)
+        actions: Dict[str, Callable[[int, int], int]] = {
+            '+': lambda a, b: a + b,
+            '-': lambda a, b: a - b,
+            '*': lambda a, b: a * b,
+            '/': lambda a, b: a // b,
+        }
+
+        if action in actions:
+            b = self.pop()
+            a = self.pop()
+            self.push(actions[action](a, b))
 
     def get_result(self) -> Optional[int]:
-        if len(self.items):
+        if len(self.__items):
             return self.pop()
 
 
@@ -110,26 +111,15 @@ def read_input() -> List[str]:
 
 
 def main(items: List[str]) -> Optional[int]:
-    """ID: 71354041."""
-    stack = PolandStack()
+    stack = Stack()
 
     for item in items:
         if item in ('+', '-', '*', '/'):
-            stack.calc(item)
+            stack.calculate(item)
         else:
             stack.push(int(item))
 
     return stack.get_result()
-
-
-def test() -> None:
-    cases: Dict[str, int] = {
-        '2 1 + 3 *': 9,
-        '7 2 + 4 * 2 +': 38,
-    }
-    for seq, expection in cases.items():
-        assert main(seq.split()) == expection
-    print('OK')
 
 
 if __name__ == '__main__':
