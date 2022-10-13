@@ -1,4 +1,6 @@
 """
+ID: 72004790.
+
 Тимофей решил организовать соревнование по спортивному программированию,
 чтобы найти талантливых стажёров. Задачи подобраны, участники
 зарегистрированы, тесты написаны. Осталось придумать, как в конце
@@ -48,7 +50,8 @@
 Указатель left — голубой, right — оранжевый.
 """
 from dataclasses import dataclass
-from typing import List
+from typing import List, Tuple
+
 
 @dataclass
 class Contestant:
@@ -59,46 +62,47 @@ class Contestant:
     def __gt__(self, other: 'Contestant'):
         if self.decision != other.decision:
             return self.decision > other.decision
-        if self.fine != other.fine:
-            return self.fine > other.fine
 
-        return self.login > other.login
+        if self.fine != other.fine:
+            return self.fine < other.fine
+
+        return self.login < other.login
 
     def __str__(self):
         return self.login
 
 
-def partition(contest_list, pivot):
-    left = []
-    center = []
-    right = []
-    for contestant in contest_list:
-        if contestant > pivot:
-            right.append(contestant)
-        elif contestant < pivot:
-            left.append(contestant)
-        else:
-            center.append(contestant)
+def quicksort(arr: List[Contestant], pivot: int, left: int, right: int):
+    if left == right:
+        return arr
 
-    return left, center, right
+    while left < pivot and arr[left] > arr[pivot]:
+        left += 1
 
-def quicksort(contest_list: List[Contestant]):
-    if len(contest_list) < 2:
-        return contest_list
-    else:
-        pivot = contest_list[len(contest_list) // 2]
-        left, center, right = partition(contest_list, pivot)
-        return quicksort(left) + center + quicksort(right)
+    while right > pivot and arr[right] < arr[pivot]:
+        right -= 1
+
+    if left != right:
+        arr[left], arr[right] = arr[right], arr[left]
+
+    return quicksort(arr, pivot, left, right)
 
 
 def main(contest_list: List[Contestant]):
-    for contestant in quicksort(contest_list):
+    pivot = len(contest_list) // 2
+    for contestant in quicksort(contest_list, pivot, 0, len(contest_list)-1):
         print(contestant)
 
 
 def read_input() -> List[Contestant]:
     n = int(input())
-    contest_list = [Contestant(*input().strip().split()) for _ in range(n)]
+    contest_list = [
+        Contestant(
+            *(lambda a, b, c: (a, int(b), int(c)))(*input().strip().split())
+        )
+        for _ in range(n)
+    ]
+
     return contest_list
 
 
