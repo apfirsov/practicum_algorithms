@@ -1,5 +1,5 @@
 """
-ID: 72004790.
+ID: 72031251.
 
 Тимофей решил организовать соревнование по спортивному программированию,
 чтобы найти талантливых стажёров. Задачи подобраны, участники
@@ -50,7 +50,7 @@ ID: 72004790.
 Указатель left — голубой, right — оранжевый.
 """
 from dataclasses import dataclass
-from typing import List, Tuple
+from typing import List
 
 
 @dataclass
@@ -72,25 +72,37 @@ class Contestant:
         return self.login
 
 
-def quicksort(arr: List[Contestant], pivot: int, left: int, right: int):
-    if left == right:
-        return arr
+def quick_sort(
+        arr: List[Contestant], left: int = 0, right: int = None) -> None:
+    """Sorts arr DESC."""
+    if right is None:
+        right = len(arr) - 1
 
-    while left < pivot and arr[left] > arr[pivot]:
-        left += 1
+    if left >= right:
+        return
 
-    while right > pivot and arr[right] < arr[pivot]:
-        right -= 1
+    pivot_index = (left + right) // 2
+    pivot = arr[pivot_index]
 
-    if left != right:
-        arr[left], arr[right] = arr[right], arr[left]
+    i = left
+    j = right
+    while i < j:
+        while arr[i] > pivot:
+            i += 1
+        while arr[j] < pivot:
+            j -= 1
+        if i <= j:
+            arr[i], arr[j] = arr[j], arr[i]
+            i += 1
+            j -= 1
 
-    return quicksort(arr, pivot, left, right)
+    quick_sort(arr, left, j)
+    quick_sort(arr, i, right)
 
 
-def main(contest_list: List[Contestant]):
-    pivot = len(contest_list) // 2
-    for contestant in quicksort(contest_list, pivot, 0, len(contest_list)-1):
+def main(contest_list) -> None:
+    quick_sort(contest_list)
+    for contestant in contest_list:
         print(contestant)
 
 
@@ -102,7 +114,6 @@ def read_input() -> List[Contestant]:
         )
         for _ in range(n)
     ]
-
     return contest_list
 
 
