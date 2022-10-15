@@ -62,11 +62,10 @@ class Contestant:
     def __gt__(self, other: 'Contestant'):
         if self.decision != other.decision:
             return self.decision > other.decision
-
-        if self.fine != other.fine:
+        elif self.fine != other.fine:
             return self.fine < other.fine
-
-        return self.login < other.login
+        else:
+            return self.login < other.login
 
     def __str__(self):
         return self.login
