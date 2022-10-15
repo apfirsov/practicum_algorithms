@@ -38,11 +38,9 @@ def search(nums: List[int], target: int, left: int, right: int) -> int:
     i = (left + right) // 2
     if nums[i] == target:
         return i
-
-    if left >= right:
+    elif left >= right:
         return -1
-
-    if (nums[left] <= target <= nums[i - 1]
+    elif (nums[left] <= target <= nums[i - 1]
             or (nums[i + 1] <= nums[right] and target < nums[i + 1])):
         return search(nums, target, left, i-1)
     else:

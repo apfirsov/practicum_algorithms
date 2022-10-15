@@ -50,7 +50,7 @@ ID: 72031251.
 Указатель left — голубой, right — оранжевый.
 """
 from dataclasses import dataclass
-from typing import List
+from typing import List, Optional
 
 
 @dataclass
@@ -72,8 +72,8 @@ class Contestant:
         return self.login
 
 
-def quick_sort(
-        arr: List[Contestant], left: int = 0, right: int = None) -> None:
+def quick_sort(arr: List[Contestant],
+               left: int = 0, right: Optional[int] = None) -> None:
     """Sorts arr DESC."""
     if right is None:
         right = len(arr) - 1
@@ -102,8 +102,7 @@ def quick_sort(
 
 def main(contest_list) -> None:
     quick_sort(contest_list)
-    for contestant in contest_list:
-        print(contestant)
+    print(*contest_list, sep='\n')
 
 
 def read_input() -> List[Contestant]:
