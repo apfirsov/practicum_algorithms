@@ -21,6 +21,7 @@
 Формат вывода
 Выведите все возможные комбинации букв через пробел.
 """
+
 BUTTONS = {
     '2': 'abc',
     '3': 'def',
@@ -33,16 +34,13 @@ BUTTONS = {
 }
 
 
-def combinations(result, numbers):
-    if not numbers:
+def combinations(numbers: str, result: str ='', i: int=0) -> None:
+    if i == len(numbers):
         print(result, end=' ')
         return
-    for letter in BUTTONS[numbers[0]]:
-        result += letter
-        combinations(result, numbers[1:])
-        result = result[:-1]
+    for letter in BUTTONS[numbers[i]]:
+        combinations(numbers, result + letter, i + 1)
 
 
 if __name__ == "__main__":
-    numbers = input()
-    combinations('', numbers)
+    combinations(input())
